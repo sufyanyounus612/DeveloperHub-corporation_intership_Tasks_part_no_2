@@ -1,7 +1,7 @@
 # DeveloperHub-corporation_intership_Tasks_part_no_2
 Task 1
  
-# 🏦 Term Deposit Subscription Prediction — Bank Marketing
+# Term Deposit Subscription Prediction — Bank Marketing
  
 ## Overview
 Predict whether a bank customer will subscribe to a term deposit based on demographic,
@@ -58,7 +58,7 @@ python task1_bank_marketing.py
 ---
  Task 2
  
-# 🛍️ Customer Segmentation Using K-Means Clustering
+# Customer Segmentation Using K-Means Clustering
  
 ## Overview
 Cluster mall customers based on age, income, and spending habits using K-Means
@@ -117,4 +117,62 @@ python task2_segmentation.py
 - Elbow method & Silhouette score for optimal K
 - PCA and t-SNE dimensionality reduction
 - Customer profiling & data-driven marketing strategy
+---
+ Task 3
+ 
+# Household Energy Consumption — Time Series Forecasting
+ 
+## Overview
+Forecast short-term household energy usage using historical time patterns.
+Compare ARIMA, GradientBoosting (XGBoost-style), and Prophet-style Fourier models.
+ 
+## Dataset
+| Property | Value |
+|---|---|
+| Records | 1,440 (hourly) → 360 (4-hourly resampled) |
+| Features | Date, Time, Global_active_power, Voltage, Sub_metering_1/2/3 |
+| Period | 60 days (Jan–Mar 2007) |
+| Source | UCI Household Power Consumption |
+ 
+## Project Structure
+```
+task3_energy_forecasting/
+├── task3_energy_forecasting.py       # Main script
+├── task3_forecasting.png             # Full series + per-model forecasts + metrics
+├── task3_household_power_consumption.csv
+└── README.md
+```
+ 
+## Feature Engineering (23 Features)
+| Feature Type | Features |
+|---|---|
+| Temporal | hour, dayofweek, month, is_weekend |
+| Cyclical Encoding | hour_sin, hour_cos, dow_sin, dow_cos |
+| Lag Features | lag_1 through lag_12 |
+| Rolling Stats | rolling_mean_6, rolling_std_6, rolling_mean_12 |
+ 
+## Model Results
+| Model | MAE | RMSE | Notes |
+|---|---|---|---|
+| ARIMA(12,1,0) | 0.076 | 0.094 | Manual AR with differencing |
+| **GBR (XGBoost-style)** | **0.060** | **0.083** | **Best model** |
+| Prophet-style | 0.474 | 0.563 | Fourier + linear trend (Ridge) |
+ 
+## Key Patterns Discovered
+- **Peak Hour**: 19:00–20:00 daily
+- **Weekend Effect**: +15% higher consumption
+- **Seasonal Effect**: Winter baseline 30% above summer
+- **GBR Advantage**: Lag features capture autocorrelation better than Fourier terms
+## How to Run
+```bash
+pip install scikit-learn pandas numpy matplotlib scipy
+python task3_energy_forecasting.py
+```
+ 
+## Skills Gained
+- Time series resampling & parsing
+- Cyclical feature encoding (sin/cos transforms)
+- ARIMA manual implementation
+- Model comparison with MAE & RMSE
+- Temporal data visualization
 ---
