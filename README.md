@@ -176,3 +176,72 @@ python task3_energy_forecasting.py
 - Model comparison with MAE & RMSE
 - Temporal data visualization
 ---
+Task 4
+ 
+# 💳 Loan Default Risk with Business Cost Optimization
+ 
+## Overview
+Predict loan default probability and optimize the classification threshold based on
+a business cost-benefit framework — minimizing total financial loss to the bank.
+ 
+## Dataset
+| Property | Value |
+|---|---|
+| Records | 10,000 |
+| Features | 21 raw + 4 engineered = 25 total |
+| Target | `TARGET` — 1=Default, 0=No Default |
+| Default Rate | ~14% |
+| Source | Home Credit Default Risk (Kaggle) |
+ 
+## Project Structure
+```
+task4_loan_default/
+├── task4_loan_default.py            # Main script
+├── task4_loan_default.png           # ROC, CMs, cost curve, feature importance
+├── task4_home_credit_default.csv
+└── README.md
+```
+ 
+## Engineered Features
+| Feature | Formula |
+|---|---|
+| ANNUITY_INCOME_RATIO | AMT_ANNUITY / AMT_INCOME_TOTAL |
+| CREDIT_ANNUITY_RATIO | AMT_CREDIT / AMT_ANNUITY |
+| AGE_YEARS | -DAYS_BIRTH / 365 |
+| EMPLOYED_YEARS | -DAYS_EMPLOYED / 365 |
+| EXT_MEAN | Mean of EXT_SOURCE_1/2/3 |
+ 
+## Model Performance
+| Model | AUC | F1 (t=0.5) | Notes |
+|---|---|---|---|
+| Logistic Regression | 0.774 | 0.405 | Best AUC |
+| Gradient Boosting | 0.753 | 0.188 | Best for cost optimization |
+ 
+## Business Cost Framework
+| Scenario | Cost |
+|---|---|
+| False Positive (approve defaulter) | $50,000 |
+| False Negative (reject good client) | $5,000 |
+| **Default threshold cost (0.50)** | **$3,990,000** |
+| **Optimal threshold cost (0.857)** | **$1,415,000** |
+| **Total savings** | **$2,575,000 (64.5%)** |
+ 
+## Top Risk Features (GBR Importance)
+1. `CREDIT_INCOME_RATIO` — credit burden relative to income
+2. `EXT_SOURCE_2` — external credit score 2
+3. `EXT_SOURCE_3` — external credit score 3
+4. `EXT_MEAN` — average external score
+5. `EMPLOYED_YEARS` — employment stability
+## How to Run
+```bash
+pip install scikit-learn pandas numpy matplotlib seaborn scipy
+python task4_loan_default.py
+```
+ 
+## Skills Gained
+- Binary classification with imbalanced risk data
+- Business cost matrix definition
+- Threshold sweep & cost minimization
+- Feature importance analysis
+- Risk scoring in financial services
+---
