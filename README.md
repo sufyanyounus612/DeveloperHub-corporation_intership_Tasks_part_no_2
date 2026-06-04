@@ -245,3 +245,72 @@ python task4_loan_default.py
 - Feature importance analysis
 - Risk scoring in financial services
 ---
+Task 5
+ 
+#  Global Superstore — Interactive Business Intelligence Dashboard
+ 
+## Overview
+An interactive Streamlit dashboard for analyzing sales, profit, and segment-wise
+performance of a global retail superstore across 4 years of order data.
+ 
+## Dataset
+| Property | Value |
+|---|---|
+| Records | 9,994 orders |
+| Features | 20 (Order, Customer, Product, Sales, Profit, Discount...) |
+| Period | 2017–2020 |
+| Regions | West, East, Central, South |
+| Source | Global Superstore Dataset (Kaggle) |
+ 
+## Project Structure
+```
+task5_dashboard/
+├── task5_streamlit_app.py          # Streamlit interactive dashboard
+├── task5_dashboard.py              # Static matplotlib dashboard
+├── task5_dashboard.png             # Static dashboard output
+├── task5_global_superstore_dataset.csv
+└── README.md
+```
+ 
+## Dashboard Features
+| Component | Description |
+|---|---|
+| Sidebar Filters | Region, Category, Sub-Category, Segment, Year |
+| KPI Cards | Total Sales, Profit, Orders, Margin, Avg Order Value |
+| Monthly Trend | Dual-axis Sales & Profit line chart |
+| Region Chart | Horizontal bar — sales by region |
+| Category Profit | Bar chart with positive/negative color coding |
+| Top 5 Customers | Horizontal bar by total sales |
+| Sub-Category View | Side-by-side Sales & Profit per sub-category |
+ 
+## Key Business Insights
+| Finding | Detail |
+|---|---|
+| Best Region | West — highest sales & profit |
+| Best Margin | Office Supplies (~22%) |
+| Lowest Margin | Furniture (~5%) |
+| Discount Risk | >30% discount = negative profit |
+| Best Segment | Corporate by margin efficiency |
+| Seasonal Spike | Q4 consistently highest sales |
+ 
+## How to Run (Streamlit)
+```bash
+pip install streamlit pandas numpy matplotlib scipy
+streamlit run task5_streamlit_app_local.py
+Local URL: http://localhost:8501
+```
+ 
+## How to Run (Static Dashboard)
+```bash
+pip install pandas numpy matplotlib seaborn scipy
+python task5_dashboard.py
+```
+ 
+## Skills Gained
+- Streamlit dashboard development
+- Dynamic filter logic with pandas
+- Dual-axis matplotlib charts
+- KPI card design
+- Business intelligence storytelling
+- Profit margin & discount impact analysis
+---
